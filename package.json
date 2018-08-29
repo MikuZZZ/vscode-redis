@@ -1,0 +1,89 @@
+{
+  "name": "vscode-redis",
+  "displayName": "vscode-redis",
+  "description": "",
+  "version": "0.0.1",
+  "publisher": "mikuzz",
+  "engines": {
+    "vscode": "^1.26.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onView:redisKeyView"
+  ],
+  "main": "./out/extension",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "redis-explorer",
+          "title": "Redis Explorer",
+          "icon": "media/dep.svg"
+        }
+      ]
+    },
+    "views": {
+      "redis-explorer": [
+        {
+          "id": "redisKeyView",
+          "name": "Redis Keys"
+        },
+        {
+          "id": "redisScriptView",
+          "name": " Redis Scripts"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "redisKeyView.refresh",
+        "title": "Refresh",
+        "icon": {
+          "light": "resources/light/refresh.svg",
+          "dark": "resources/dark/refresh.svg"
+        }
+      },
+      {
+        "command": "redisKeyView.setKeyFilter",
+        "title": "Set key filter",
+        "icon": {
+          "light": "resources/light/folder.svg",
+          "dark": "resources/dark/folder.svg"
+        }
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "redisKeyView.refresh",
+          "when": "view == redisKeyView",
+          "group": "navigation"
+        },
+        {
+          "command": "redisKeyView.setKeyFilter",
+          "when": "view == redisKeyView",
+          "group": "navigation"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "postinstall": "node ./node_modules/vscode/bin/install"
+  },
+  "devDependencies": {
+    "@types/ioredis": "^3.2.15",
+    "@types/node": "*",
+    "typescript": "^2.1.4",
+    "vscode": "^1.1.17"
+  },
+  "dependencies": {
+    "@types/lodash": "^4.14.116",
+    "bluebird": "^3.5.1",
+    "ioredis": "^4.0.0",
+    "lodash": "^4.17.10"
+  }
+}
